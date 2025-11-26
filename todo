@@ -1,5 +1,5 @@
 ## backend
-[ ] fastapi 프로젝트 생성
+[v] fastapi 프로젝트 생성
 [ ] endpoint에 맞게 기능 구현
 [ ] /progress 엔드포인트에 값 받아올 수 있도록 get method로 저장 가능하게
 [ ] DB연동 필요 (Sqlalchemy)
