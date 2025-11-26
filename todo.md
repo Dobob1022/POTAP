@@ -1,0 +1,20 @@
+## backend
+[ ] fastapi 프로젝트 생성
+[ ] endpoint에 맞게 기능 구현
+[ ] /progress 엔드포인트에 값 받아올 수 있도록 get method로 저장 가능하게
+[ ] DB연동 필요 (Sqlalchemy)
+[ ] 
+## frontend
+[ ] Websocket 생성 및 push example생성
+
+## PXE Server
+[ ] 서버 구축하기
+[ ] DHCP Server 구축
+[ ] tftp server 구축
+[ ] http 서버 (nginx) 구축
+## Proxmox
+[ ] 인증 로직에 필요한 인증키 만들기
+[ ] VM생성 테스트 진행
+
+## project
+[ ] .env 배포
