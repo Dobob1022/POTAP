@@ -1,1 +1,1 @@
-fastapi dev app.py
+fastapi run app.py
