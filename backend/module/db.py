@@ -34,6 +34,30 @@ def get_db():
     finally:
         db.close()
 
+class Templete(Base):
+    __tablename__ = "templete"
+
+    # Mapped와 mapped_column을 사용하기 위해 위에서 import 했습니다.
+    id: Mapped[int] = mapped_column(primary_key=True)
+    mac_address: Mapped[str] = mapped_column(String(17), unique=True, nullable=False)
+    hostname: Mapped[str] = mapped_column(String(50), nullable=False)
+    template: Mapped[str] = mapped_column(String(50), default="ubuntu_2404")
+    status: Mapped[str] = mapped_column(String(20), default="started")
+
+    def __repr__(self):
+        return f"<VmInfo({self.mac_address} -> {self.hostname})>"
+
+def init_db():
+    """데이터베이스 테이블 생성"""
+    Base.metadata.create_all(bind=engine)
+
+def get_db():
+    """FastAPI Dependency용 세션 제너레이터"""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 #db init

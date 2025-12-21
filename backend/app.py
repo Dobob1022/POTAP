@@ -61,4 +61,12 @@ def proxmox_get_next_vmid():
     except Exception as e:
         return {"error": str(e)}
     
-
+# Add OS templete creation endpoint
+@app.post("/templete")
+def create_templete():
+    """Create OS templete"""
+    try:
+        ## ADD TEMPLETE CREATION LOGIC HERE
+        return {"status": "OK"}
+    except Exception as e:
+        return {"error": str(e)}
