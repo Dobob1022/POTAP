@@ -3,8 +3,18 @@ from typing import Union
 from fastapi import FastAPI
 app = FastAPI()
 
+#import db module
+from module import db
+
+#import proxmoxer module
+from module import proxmox
+
 #for mac address validation
 import re
+
+#for load dot\env
+from dotenv import load_dotenv
+load_dotenv()
 
 #Function to validate mac address
 def is_valid_mac(mac: str) -> bool:
@@ -26,4 +36,29 @@ def read_item(mac_address: str, ip_address: str, progress_value: int):
         # Return error if MAC address is invalid
         return {"error": "Invalid MAC address format"}
     return {"item_id": mac_address, "ip": ip_address, "progress": progress_value}
+
+@app.get("/vms")
+def get_vms():
+    """Returns list of all VMs from database"""
+    db_session = next(db.get_db())
+    vms = db_session.query(db.VmInfo).all()
+    return vms
+
+@app.post("/vms")
+def create_vm(mac_address: str, hostname: str, template: str):
+    """Create a new VM entry in the database"""
+    db_session = next(db.get_db())
+    new_vm = db.add_vm(db_session, mac_address, hostname, template)
+    return new_vm
+
+## test proxmox connection with next vmid
+@app.get("/proxmox/next_vmid")
+def proxmox_get_next_vmid():
+    """Returns next available VMID from Proxmox server"""
+    try:
+        vmid = proxmox.get_next_vmid()
+        return {"next_vmid": vmid}
+    except Exception as e:
+        return {"error": str(e)}
+    
 

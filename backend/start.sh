@@ -1,1 +1,1 @@
-fastapi run app.py
+fastapi run app.py --reload
